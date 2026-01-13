@@ -12,11 +12,11 @@ export default function About() {
           {/* LEFT CONTENT */}
           <div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-6">
-              About FundYourFX
+              About FXCELITE
             </h2>
 
             <p className="text-lg text-slate-200 leading-relaxed max-w-xl">
-              We are FundYourFX, an award-winning prop firm built to fuel your
+              We are FXCELITE, an award-winning prop firm built to fuel your
               trading success. Benefit from instant funding, scalable
               evaluation plans, and exceptional customer support that will
               accelerate your trading journey. Empower your trading and
@@ -31,7 +31,7 @@ export default function About() {
               {/* VIDEO IMAGE */}
               <img
                 src={videoThumbnail}
-                alt="FundYourFX Introduction"
+                alt= "FXCELITE Introduction"
                 className="rounded-2xl w-full max-w-lg object-cover"
               />
 

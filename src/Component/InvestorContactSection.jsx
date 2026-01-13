@@ -23,8 +23,8 @@ export default function InvestorContactSection() {
             </h2>
 
             <p className="text-white/80 leading-relaxed max-w-xl mb-8">
-              To learn more about investing in FundYourFX or to start the
-              investment process. We appreciate your interest in FundYourFX and
+              To learn more about investing in FXCELITE or to start the
+              investment process. We appreciate your interest in FXCELITE and
               look forward to partnering with you to achieve exceptional
               investment returns.
             </p>

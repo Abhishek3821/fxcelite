@@ -32,7 +32,7 @@ export default function WhiteLabelSolution() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
             <Feature text="Large volumes of available funds and industry-best spreads starting at 0 pips." />
             <Feature text="The most well-known trading platforms with your own custom branding." />
-            <Feature text="Benefit from working with an established and reputable company like FundYourFX." />
+            <Feature text="Benefit from working with an established and reputable company like FXCELITE." />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20 max-w-4xl mx-auto">

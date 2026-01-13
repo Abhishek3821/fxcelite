@@ -26,7 +26,7 @@ export default function PrivacyPolicy() {
           </h2>
 
           <p>
-            When you submit your information to FundYourFX, our primary concern
+            When you submit your information to FXCELITE  , our primary concern
             is storing it securely. From time to time, we may inform you about
             our services and promotional offers that we believe are relevant to
             you.
@@ -84,7 +84,7 @@ export default function PrivacyPolicy() {
 
             <DisclosureItem
               title="Product Communication"
-              text="We use your data to communicate with you, improve our services, and periodically send promotional emails about FundYourFX events, awards, or other information you may find relevant."
+              text="We use your data to communicate with you, improve our services, and periodically send promotional emails about  events,  awards, or other information you may find relevant."
             />
 
             <DisclosureItem
@@ -104,7 +104,7 @@ export default function PrivacyPolicy() {
 
             <DisclosureItem
               title="Transfer of Ownership"
-              text="If FundYourFX undergoes a merger, acquisition, or sale of assets, your information may be transferred to the new owner under the terms of this Privacy Policy."
+              text="If FXCELITE undergoes a merger, acquisition, or sale of assets, your information may be transferred to the new owner under the terms of this Privacy Policy."
             />
 
             <DisclosureItem

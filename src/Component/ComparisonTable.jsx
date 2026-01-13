@@ -75,7 +75,7 @@ export default function ComparisonTable() {
               <tr className="border-b border-white/10">
                 <th className="px-6 py-5 font-semibold">Feature</th>
                 <th className="px-6 py-5 font-semibold bg-indigo-600/90">
-                  FundYourFX
+                 FXCELITE
                 </th>
                 <th className="px-6 py-5 font-semibold">FTMO</th>
                 <th className="px-6 py-5 font-semibold">Fundingpips</th>

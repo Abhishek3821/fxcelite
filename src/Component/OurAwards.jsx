@@ -17,7 +17,7 @@ export default function OurAwards() {
             </h2>
 
             <p className="text-slate-300 leading-relaxed">
-              FundYourFX is an award-winning prop firm renowned for its
+              FXCELITE is an award-winning prop firm renowned for its
               excellence in Instant Funding and Customer Service, providing
               top-notch trading support and funding solution
             </p>

@@ -45,13 +45,13 @@ export default function TermsAndConditions() {
           {/* DISCLAIMER */}
           <div className="bg-black/40 border border-white/10 rounded-xl p-6 text-white font-semibold uppercase text-xs md:text-sm">
             In accordance with applicable laws, none of the services provided by
-            FundYourFX constitute investment services or investment advice.
+            FXCELITE constitute investment services or investment advice.
             Employees, staff, and representatives are not authorised to provide
             investment recommendations.
           </div>
 
           <p>
-            FundYourFX provides Instant Demo live-Funded Accounts in a simulated
+            FXCELITE provides Instant Demo live-Funded Accounts in a simulated
             trading environment using third-party brokers for educational purposes
             only. All accounts are simulated and do not involve real financial
             instruments.
@@ -71,7 +71,7 @@ export default function TermsAndConditions() {
           </p>
 
           <p>
-            FundYourFX shall supply trading facilities, risk monitoring services,
+            FXCELITE shall supply trading facilities, risk monitoring services,
             and a Demo Live-Funded trading account.
           </p>
 
@@ -111,7 +111,7 @@ export default function TermsAndConditions() {
             Submission of personal information is governed by our Privacy Policy.
             <br />
             <a
-              href="https://www.fundyourfx.com/privacy-policy"
+              href="https://www.fxcelite.com/privacy-policy"
               target="_blank"
               rel="noopener noreferrer"
               className="text-emerald-400 underline"
@@ -129,7 +129,7 @@ export default function TermsAndConditions() {
             Our Affiliate Program is governed by separate Affiliate Terms.
             <br />
             <a
-              href="https://www.fundyourfx.com/affiliate-terms-of-use/"
+              href="https://www.fxcelite.com/affiliate-terms-of-use/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-emerald-400 underline"
@@ -146,10 +146,10 @@ export default function TermsAndConditions() {
           <p>
             For any questions regarding these Terms, please contact us at{" "}
             <a
-              href="mailto:support@fundyourfx.com"
+              href="mailto:support@fxcelite.com"
               className="text-emerald-400 underline"
             >
-              support@fundyourfx.com
+              support@fxcelite.com
             </a>
             . We respond within one week.
           </p>

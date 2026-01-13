@@ -9,15 +9,15 @@ const FAQ_DATA = [
     category: "General",
     items: [
       {
-        q: "What is FundYourFX?",
-        a: "FundYourFX is a proprietary trading firm that provides traders with access to funded accounts, allowing them to trade financial markets using the firm's capital."
+        q: "What is FXCELITE?",
+        a: "FXCELITE is a proprietary trading firm that provides traders with access to funded accounts, allowing them to trade financial markets using the firm's capital."
       },
       {
         q: "Are there any countries where trading is restricted?",
         a: "Yes. Traders from sanctioned or restricted jurisdictions are not allowed due to compliance and regulatory requirements."
       },
       {
-        q: "How does FundYourFX make money?",
+        q: "How does FXCELITE make money?",
         a: "We generate revenue through challenge fees, subscriptions, and a share of profits from successful traders."
       }
     ]

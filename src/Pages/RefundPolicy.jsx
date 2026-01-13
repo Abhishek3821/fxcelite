@@ -16,10 +16,10 @@ export default function RefundPolicy() {
           <p>
             By sending an email to{" "}
             <a
-              href="mailto:support@fundyourfx.com"
+              href="mailto:support@fxcelite.com"
               className="text-emerald-400 underline"
             >
-              support@fundyourfx.com
+              support@fxcelite.com
             </a>
             , the Customer may request the termination of the Trading Account at
             any time. Such a request is considered a request to terminate the
@@ -50,7 +50,7 @@ export default function RefundPolicy() {
           </p>
 
           <p>
-            After payment for a selected FundYourFX program, the Customer will
+            After payment for a selected FXCELITE program, the Customer will
             receive login credentials for the Trading Platform via email or
             within the Client Section. The Trading Account is considered
             activated upon receipt of these credentials.
@@ -68,7 +68,7 @@ export default function RefundPolicy() {
           </p>
 
           <p>
-            If the Customer does not activate their FundYourFX Trading Account
+            If the Customer does not activate their FXCELITE Trading Account
             within <strong>30 calendar days</strong> of the account being made
             available, access will be suspended. The Customer may request
             reactivation within <strong>3 days</strong> of suspension by

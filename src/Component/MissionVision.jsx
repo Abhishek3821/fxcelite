@@ -9,7 +9,7 @@ export default function MissionVision() {
         {/* QUOTE */}
         <div className="text-center max-w-4xl mx-auto mb-20">
           <p className="text-2xl md:text-3xl font-extrabold text-white leading-snug">
-            <span className="text-indigo-400">“FundYourFX:</span> Where traders create
+            <span className="text-indigo-400">“FXCELITE:</span> Where traders create
             opportunities for traders to succeed.”
           </p>
         </div>
