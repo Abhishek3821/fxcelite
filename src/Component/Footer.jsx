@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   Facebook,
   Instagram,
@@ -50,73 +51,70 @@ export default function Footer() {
             </div>
 
             <p className="text-slate-300 text-sm mb-6">
-              GOOD ★★★★★ <span className="text-slate-400">2207 reviews · Trustindex</span>
+              GOOD ★★★★★{" "}
+              <span className="text-slate-400">
+                2207 reviews · Trustindex
+              </span>
             </p>
 
             {/* SOCIALS */}
             <div className="flex gap-3">
-              {[Facebook, Instagram, Youtube, Linkedin, Twitter, MessageCircle].map(
-                (Icon, i) => (
-                  <div
-                    key={i}
-                    className="w-10 h-10 rounded-full bg-indigo-600/80 flex items-center justify-center text-white hover:opacity-90 transition"
-                  >
-                    <Icon size={18} />
-                  </div>
-                )
-              )}
+              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social">
+                <Facebook size={18} />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social">
+                <Instagram size={18} />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="social">
+                <Youtube size={18} />
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social">
+                <Linkedin size={18} />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="social">
+                <Twitter size={18} />
+              </a>
+              <a href="https://wa.me/" target="_blank" rel="noreferrer" className="social">
+                <MessageCircle size={18} />
+              </a>
             </div>
           </div>
 
           {/* MAIN MENU */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Main Menu</h4>
-            <ul className="space-y-3 text-slate-300 text-sm">
-              <li>Home</li>
-              <li>Growth Plan</li>
-              <li>Programs</li>
-              <li>Reviews</li>
-              <li>About Us</li>
-              <li>Dashboard</li>
-            </ul>
-          </div>
+          <FooterColumn title="Main Menu">
+            <FooterLink to="/">Home</FooterLink>
+            <FooterLink to="/growth-plan">Growth Plan</FooterLink>
+            <FooterLink to="/pricing">Programs</FooterLink>
+            <FooterLink to="/reviews">Reviews</FooterLink>
+            <FooterLink to="/about">About Us</FooterLink>
+            <FooterLink to="/dashboard">Dashboard</FooterLink>
+          </FooterColumn>
 
           {/* RESOURCES */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Resources</h4>
-            <ul className="space-y-3 text-slate-300 text-sm">
-              <li>Blog & Trading Guides</li>
-              <li>FAQs & Helpdesk</li>
-            </ul>
+          <FooterColumn title="Resources">
+            {/* <FooterLink to="/blog">Blog & Trading Guides</FooterLink> */}
+            <FooterLink to="faqs">FAQs & Helpdesk</FooterLink>
 
             <h4 className="text-white font-semibold mt-6 mb-4">Terms</h4>
-            <ul className="space-y-3 text-slate-300 text-sm">
-              <li>Terms and Conditions</li>
-              <li>Refund Policy</li>
-              <li>Privacy Policy</li>
-            </ul>
-          </div>
+            <FooterLink to="/terms-and-conditions">Terms and Conditions</FooterLink>
+            <FooterLink to="/refund-policy">Refund Policy</FooterLink>
+            <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
+          </FooterColumn>
 
           {/* LEGAL */}
-          <div>
-            <h4 className="text-white font-semibold mb-4">Legal</h4>
-            <ul className="space-y-3 text-slate-300 text-sm">
-              <li>Affiliate Program</li>
-              <li>Investor Relations</li>
-              <li>White Label Solution</li>
-              <li>Charity Program</li>
-            </ul>
-          </div>
+          <FooterColumn title="Legal">
+            <FooterLink to="/affiliate">Affiliate Program</FooterLink>
+            <FooterLink to="/investor-relations">Investor Relations</FooterLink>
+            <FooterLink to="/white-label">White Label Solution</FooterLink>
+            <FooterLink to="/charity">Charity Program</FooterLink>
+          </FooterColumn>
         </div>
 
         {/* DISCLAIMER */}
         <p className="text-slate-400 text-xs leading-relaxed mb-10">
           We provide virtual demo accounts that simulate live market conditions.
-          Any reference to “Funded” on our website or in our terms pertains only
-          to virtual funding. Our services are not investment services or
-          recommendations, and our staff are not authorized to offer investment
-          advice. All information is for educational purposes only and does not
-          constitute specific investment advice or recommendations.
+          Any reference to “Funded” on our website refers only to virtual funding.
+          Our services are not investment services or recommendations.
         </p>
 
         {/* DIVIDER */}
@@ -129,6 +127,47 @@ export default function Footer() {
         </div>
 
       </div>
+
+      {/* shared styles */}
+      <style>{`
+        .social {
+          width: 40px;
+          height: 40px;
+          border-radius: 9999px;
+          background: rgba(79,70,229,0.8);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          transition: opacity 0.2s;
+        }
+        .social:hover { opacity: 0.85; }
+      `}</style>
     </footer>
+  );
+}
+
+/* =========================
+   HELPERS
+========================= */
+function FooterColumn({ title, children }) {
+  return (
+    <div>
+      <h4 className="text-white font-semibold mb-4">{title}</h4>
+      <ul className="space-y-3 text-slate-300 text-sm">{children}</ul>
+    </div>
+  );
+}
+
+function FooterLink({ to, children }) {
+  return (
+    <li>
+      <Link
+        to={to}
+        className="hover:text-white transition"
+      >
+        {children}
+      </Link>
+    </li>
   );
 }

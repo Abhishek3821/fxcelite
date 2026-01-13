@@ -27,7 +27,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full bg-gradient-to-r from-[#050617] via-[#0B0E2A] to-[#050617] border-b border-white/10 relative z-50">
+    <nav className="sticky top-0 z-50 w-full bg-gradient-to-r from-[#050617] via-[#0B0E2A] to-[#050617] border-b border-white/10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-20">
 
@@ -71,14 +71,13 @@ export default function Navbar() {
               )}
             </div>
 
-            <NavLink to="/faqs">FAQs</NavLink>
-            {/* <NavLink to="/academy">Academy</NavLink>
-            <NavLink to="/blog">Blog</NavLink> */}
-            <NavLink to="/affiliate">Affiliate</NavLink>
-            <NavLink to="/about">About Us</NavLink>
-            <NavLink to="/pricing">Pricing</NavLink>
+            <NavLink to="/faqs" className="hover:text-white">FAQs</NavLink>
+            <NavLink to="/affiliate" className="hover:text-white">Affiliate</NavLink>
+            <NavLink to="/about" className="hover:text-white">About Us</NavLink>
+            <NavLink to="/pricing" className="hover:text-white">Pricing</NavLink>
+            <NavLink to="/growth-plan" className="hover:text-white">Growth Plan</NavLink>
 
-            <NavLink to="/login" className="flex items-center gap-1">
+            <NavLink to="/login" className="flex items-center gap-1 hover:text-white">
               Log In <ExternalLink size={14} />
             </NavLink>
           </div>
@@ -86,7 +85,7 @@ export default function Navbar() {
           {/* CTA */}
           <button
             onClick={() => navigate("/get-started")}
-            className="hidden md:block px-6 py-3 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 text-black font-semibold"
+            className="hidden md:block px-6 py-3 rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400 text-black font-semibold hover:opacity-90"
           >
             Get Started
           </button>

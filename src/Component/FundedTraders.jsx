@@ -10,7 +10,7 @@ const traders = [
     country: "Trinidad and Tobago",
     flag: "🇹🇹",
     payout: "$1,475",
-    image: "https://images.unsplash.com/photo-1603415526960-f7e0328f07d9",
+    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde",
   },
   {
     name: "Magisha",
@@ -47,31 +47,112 @@ const traders = [
 ========================= */
 export default function FundedTraders() {
   const sliderRef = useRef(null);
-  const [canLeft, setCanLeft] = useState(false);
-  const [canRight, setCanRight] = useState(true);
+  const cardRef = useRef(null);
 
-  const CARD_WIDTH = 360;
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const updateArrows = () => {
+  const CARD_GAP = 24; // gap-6
+  const SIDE_PADDING = 24; // px-6
+
+  /* -------------------------
+     Helpers
+  -------------------------- */
+  const getCardWidth = () =>
+    cardRef.current?.offsetWidth || 320;
+
+  const scrollToIndex = (index) => {
     const el = sliderRef.current;
     if (!el) return;
-    setCanLeft(el.scrollLeft > 0);
-    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 5);
-  };
 
-  const slide = (direction) => {
-    sliderRef.current.scrollBy({
-      left: direction === "left" ? -CARD_WIDTH : CARD_WIDTH,
+    const cardWidth = getCardWidth();
+    const target =
+      index * (cardWidth + CARD_GAP) - SIDE_PADDING;
+
+    el.scrollTo({
+      left: target,
       behavior: "smooth",
     });
   };
 
+  /* -------------------------
+     Arrow handlers
+  -------------------------- */
+  const prev = () => {
+    setActiveIndex((i) => Math.max(i - 1, 0));
+  };
+
+  const next = () => {
+    setActiveIndex((i) =>
+      Math.min(i + 1, traders.length - 1)
+    );
+  };
+
+  /* -------------------------
+     Sync scroll on index change
+  -------------------------- */
+  useEffect(() => {
+    scrollToIndex(activeIndex);
+  }, [activeIndex]);
+
+  /* -------------------------
+     Drag / swipe with snap
+  -------------------------- */
   useEffect(() => {
     const el = sliderRef.current;
     if (!el) return;
-    updateArrows();
-    el.addEventListener("scroll", updateArrows);
-    return () => el.removeEventListener("scroll", updateArrows);
+
+    let startX = 0;
+    let startScroll = 0;
+    let isDown = false;
+
+    const onDown = (e) => {
+      isDown = true;
+      startX = e.pageX || e.touches[0].pageX;
+      startScroll = el.scrollLeft;
+      el.classList.add("cursor-grabbing");
+    };
+
+    const onMove = (e) => {
+      if (!isDown) return;
+      const x = e.pageX || e.touches[0].pageX;
+      el.scrollLeft = startScroll - (x - startX);
+    };
+
+    const onUp = () => {
+      if (!isDown) return;
+      isDown = false;
+      el.classList.remove("cursor-grabbing");
+
+      const cardSize = getCardWidth() + CARD_GAP;
+      const newIndex = Math.round(
+        (el.scrollLeft + SIDE_PADDING) / cardSize
+      );
+
+      setActiveIndex(
+        Math.min(
+          Math.max(newIndex, 0),
+          traders.length - 1
+        )
+      );
+    };
+
+    el.addEventListener("mousedown", onDown);
+    el.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+
+    el.addEventListener("touchstart", onDown, { passive: true });
+    el.addEventListener("touchmove", onMove, { passive: true });
+    el.addEventListener("touchend", onUp);
+
+    return () => {
+      el.removeEventListener("mousedown", onDown);
+      el.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+
+      el.removeEventListener("touchstart", onDown);
+      el.removeEventListener("touchmove", onMove);
+      el.removeEventListener("touchend", onUp);
+    };
   }, []);
 
   return (
@@ -81,7 +162,7 @@ export default function FundedTraders() {
       ========================= */}
       <style>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide { scrollbar-width: none; }
       `}</style>
 
       <section className="bg-gradient-to-b from-[#050617] to-[#070A23] py-24">
@@ -100,10 +181,16 @@ export default function FundedTraders() {
 
             {/* ARROWS */}
             <div className="flex gap-4">
-              <ArrowButton disabled={!canLeft} onClick={() => slide("left")}>
+              <ArrowButton
+                disabled={activeIndex === 0}
+                onClick={prev}
+              >
                 <ArrowLeft />
               </ArrowButton>
-              <ArrowButton disabled={!canRight} onClick={() => slide("right")}>
+              <ArrowButton
+                disabled={activeIndex === traders.length - 1}
+                onClick={next}
+              >
                 <ArrowRight />
               </ArrowButton>
             </div>
@@ -112,10 +199,13 @@ export default function FundedTraders() {
           {/* SLIDER */}
           <div
             ref={sliderRef}
-            className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide snap-x snap-mandatory"
+            className="flex gap-6 px-6 overflow-x-auto scrollbar-hide cursor-grab select-none"
           >
             {traders.map((trader, i) => (
-              <div key={i} className="snap-start">
+              <div
+                key={i}
+                ref={i === 0 ? cardRef : null}
+              >
                 <TraderCard {...trader} />
               </div>
             ))}
@@ -133,24 +223,18 @@ export default function FundedTraders() {
 function TraderCard({ name, country, flag, payout, image }) {
   return (
     <div className="relative min-w-[320px] h-[420px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1">
-
-      {/* IMAGE */}
       <img
         src={image}
         alt={name}
-        className="absolute inset-0 w-full h-full object-cover scale-100 transition-transform duration-700 ease-out hover:scale-110"
+        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
       />
-
-      {/* OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-      {/* COUNTRY */}
       <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/60 px-3 py-1.5 rounded-full text-sm text-white backdrop-blur">
         <span>{flag}</span>
         <span>{country}</span>
       </div>
 
-      {/* CONTENT */}
       <div className="absolute bottom-5 left-5 right-5 text-white">
         <p className="font-semibold text-lg">{name}</p>
         <div className="flex items-center gap-3 mt-2">
@@ -173,7 +257,11 @@ function ArrowButton({ children, onClick, disabled }) {
       onClick={onClick}
       disabled={disabled}
       className={`w-11 h-11 rounded-full border border-white/30 text-white flex items-center justify-center transition
-        ${disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-white/10"}`}
+        ${
+          disabled
+            ? "opacity-40 cursor-not-allowed"
+            : "hover:bg-white/10 hover:scale-105 active:scale-95"
+        }`}
     >
       {children}
     </button>

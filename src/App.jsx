@@ -7,6 +7,12 @@ import Footer from "./Component/Footer";
 import Affiliate from "./Pages/Affiliate";
 import FAQ from "./Pages/FAQ";
 import Pricing from "./Pages/Pricing";
+import GrowthPlan from "./Pages/GrowthPlan";
+
+import TermsAndConditions from "./Pages/TermsAndConditions";
+import RefundPolicy from "./Pages/RefundPolicy";
+import PrivacyPolicy from "./Pages/PrivacyPolicy";
+import InvestorRelations from "./Pages/InvestorRelations";
 
 function App() {
   return (
@@ -17,8 +23,14 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/affiliate" element={<Affiliate />} />
-        <Route path="/faqs" element={<FAQ />} />
+        <Route path="/faqs" element={<FAQ />} />  
         <Route path="/pricing" element={<Pricing />} />
+        <Route path="/growth-plan" element={<GrowthPlan />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/investor-relations" element={<InvestorRelations />} />
+  
       </Routes>
 
       <Footer />
