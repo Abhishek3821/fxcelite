@@ -13,11 +13,13 @@ import TermsAndConditions from "./Pages/TermsAndConditions";
 import RefundPolicy from "./Pages/RefundPolicy";
 import PrivacyPolicy from "./Pages/PrivacyPolicy";
 import InvestorRelations from "./Pages/InvestorRelations";
-
+import WhiteLabelSolutions from "./Pages/whitelabel-solutions";
+import ScrollToTop from "./Component/ScrollToTop";
 function App() {
   return (
     <Router>
       <Navbar />
+      <ScrollToTop />
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -30,6 +32,7 @@ function App() {
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/investor-relations" element={<InvestorRelations />} />
+        <Route path="/white-label-solutions" element={<WhiteLabelSolutions />} />
   
       </Routes>
 

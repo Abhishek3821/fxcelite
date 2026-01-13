@@ -105,8 +105,7 @@ export default function Footer() {
           <FooterColumn title="Legal">
             <FooterLink to="/affiliate">Affiliate Program</FooterLink>
             <FooterLink to="/investor-relations">Investor Relations</FooterLink>
-            <FooterLink to="/white-label">White Label Solution</FooterLink>
-            <FooterLink to="/charity">Charity Program</FooterLink>
+            <FooterLink to="/white-label-solutions">White Label Solution</FooterLink>
           </FooterColumn>
         </div>
 
