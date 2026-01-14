@@ -1,8 +1,12 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, CheckCircle, Star } from "lucide-react";
 
 export default function ReviewsSlider() {
   const sliderRef = useRef(null);
+  const cardRef = useRef(null);
+
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(true);
 
   const reviews = [
     {
@@ -22,7 +26,8 @@ export default function ReviewsSlider() {
       date: "29 May 2024",
       title: "",
       text: "تجربة جميلة وأنا أنصح الأصدقاء بتجربة البرنامج جميل جدا وأنا أنصح بتجربته",
-    },{
+    },
+    {
       name: "Paul Tritscher",
       date: "10 April 2025",
       title: "Super Support",
@@ -42,26 +47,57 @@ export default function ReviewsSlider() {
     },
   ];
 
-  const slide = (direction) => {
-    sliderRef.current.scrollBy({
-      left: direction === "left" ? -420 : 420,
+  /* =========================
+     HELPERS
+  ========================= */
+  const getStep = () => {
+    if (!cardRef.current) return 360;
+    const gap = 24; // gap-6
+    return cardRef.current.offsetWidth + gap;
+  };
+
+  const updateArrows = () => {
+    const el = sliderRef.current;
+    if (!el) return;
+    setCanLeft(el.scrollLeft > 5);
+    setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 5);
+  };
+
+  const slide = (dir) => {
+    const el = sliderRef.current;
+    if (!el) return;
+    el.scrollBy({
+      left: dir === "left" ? -getStep() : getStep(),
       behavior: "smooth",
     });
   };
 
+  useEffect(() => {
+    const el = sliderRef.current;
+    if (!el) return;
+
+    updateArrows();
+    el.addEventListener("scroll", updateArrows);
+    window.addEventListener("resize", updateArrows);
+
+    return () => {
+      el.removeEventListener("scroll", updateArrows);
+      window.removeEventListener("resize", updateArrows);
+    };
+  }, []);
+
   return (
     <>
-      {/* Hide scrollbar */}
+      {/* SCROLLBAR HIDE */}
       <style>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide { scrollbar-width: none; }
       `}</style>
 
-      <section className="bg-gradient-to-b from-[#050617] to-[#070A23] py-28">
+      <section className="bg-gradient-to-b from-[#050617] to-[#070A23] py-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-
           {/* HEADER */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-14">
             <p className="text-indigo-400 tracking-widest font-semibold mb-3">
               REVIEWS
             </p>
@@ -70,75 +106,126 @@ export default function ReviewsSlider() {
             </h2>
           </div>
 
-          {/* SLIDER WRAPPER */}
+          {/* SLIDER */}
           <div className="relative">
-
-            {/* LEFT ARROW */}
-            <button
+            {/* LEFT ARROW (HIDDEN ON MOBILE) */}
+            <ArrowBtn
               onClick={() => slide("left")}
-              className="absolute -left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition"
+              disabled={!canLeft}
+              position="left"
+              className="hidden md:flex"
             >
               <ArrowLeft size={18} />
-            </button>
+            </ArrowBtn>
 
-            {/* SLIDER */}
+            {/* TRACK */}
             <div
               ref={sliderRef}
-              className="flex gap-6 overflow-x-auto scroll-smooth scrollbar-hide px-6"
+              className="
+                flex gap-6 px-4 md:px-6
+                overflow-x-auto scroll-smooth
+                scrollbar-hide
+                snap-x snap-mandatory
+                cursor-grab active:cursor-grabbing
+              "
             >
               {reviews.map((review, i) => (
                 <div
                   key={i}
-                  className="min-w-[320px] sm:min-w-[380px] h-[300px] rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md p-8 flex flex-col justify-between"
+                  ref={i === 0 ? cardRef : null}
+                  className="snap-start"
                 >
-                  {/* TOP */}
-                  <div>
-                    <div className="flex items-start justify-between mb-3">
-                      <div>
-                        <h3 className="text-white font-semibold text-lg">
-                          {review.name}
-                        </h3>
-                        <p className="text-slate-400 text-sm">
-                          {review.date}
-                        </p>
-                      </div>
-                      <CheckCircle className="text-emerald-400" size={20} />
-                    </div>
-
-                    {/* STARS */}
-                    <div className="flex gap-1 text-emerald-400 mb-4">
-                      {[...Array(5)].map((_, idx) => (
-                        <Star key={idx} size={16} fill="currentColor" />
-                      ))}
-                    </div>
-
-                    {/* TITLE */}
-                    {review.title && (
-                      <p className="text-white font-semibold mb-2">
-                        {review.title}
-                      </p>
-                    )}
-
-                    {/* TEXT */}
-                    <p className="text-slate-300 text-sm leading-relaxed">
-                      {review.text}
-                    </p>
-                  </div>
+                  <ReviewCard {...review} />
                 </div>
               ))}
             </div>
 
-            {/* RIGHT ARROW */}
-            <button
+            {/* RIGHT ARROW (HIDDEN ON MOBILE) */}
+            <ArrowBtn
               onClick={() => slide("right")}
-              className="absolute -right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-full border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition"
+              disabled={!canRight}
+              position="right"
+              className="hidden md:flex"
             >
               <ArrowRight size={18} />
-            </button>
+            </ArrowBtn>
           </div>
-
         </div>
       </section>
     </>
+  );
+}
+
+/* =========================
+   CARD
+========================= */
+function ReviewCard({ name, date, title, text }) {
+  return (
+    <div
+      className="
+        min-w-[320px]
+        sm:min-w-[320px]
+        md:min-w-[390px]
+        h-[280px]
+        sm:h-[300px]
+        rounded-2xl
+        bg-white/5
+        border border-white/10
+        backdrop-blur-md
+        p-6 sm:p-8
+        flex flex-col justify-between
+      "
+    >
+      {/* TOP */}
+      <div>
+        <div className="flex items-start justify-between mb-3">
+          <div>
+            <h3 className="text-white font-semibold text-base sm:text-lg">
+              {name}
+            </h3>
+            <p className="text-slate-400 text-xs sm:text-sm">{date}</p>
+          </div>
+          <CheckCircle className="text-emerald-400" size={20} />
+        </div>
+
+        {/* STARS */}
+        <div className="flex gap-1 text-emerald-400 mb-4">
+          {[...Array(5)].map((_, idx) => (
+            <Star key={idx} size={14} fill="currentColor" />
+          ))}
+        </div>
+
+        {/* TITLE */}
+        {title && <p className="text-white font-semibold mb-2">{title}</p>}
+
+        {/* TEXT */}
+        <p className="text-slate-300 text-sm leading-relaxed">{text}</p>
+      </div>
+    </div>
+  );
+}
+
+/* =========================
+   ARROW BUTTON
+========================= */
+function ArrowBtn({ children, onClick, disabled, position, className = "" }) {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`
+        ${className}
+        absolute ${position}-0 top-1/2 -translate-y-1/2 z-10
+        w-11 h-11 rounded-full
+        border border-white/30
+        text-white
+        flex items-center justify-center
+        backdrop-blur
+        transition
+        ${disabled ? "opacity-40 cursor-not-allowed" : "hover:bg-white/10"}
+      `}
+    >
+      {children}
+    </button>
   );
 }

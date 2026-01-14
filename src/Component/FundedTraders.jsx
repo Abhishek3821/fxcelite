@@ -1,219 +1,109 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef } from "react";
+import Slider from "react-slick";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 /* =========================
    DATA
 ========================= */
 const traders = [
   {
-    name: "Romel",
-    country: "Trinidad and Tobago",
-    flag: "🇹🇹",
-    payout: "$1,475",
-    image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde",
+    name: "Raf",
+    country: "Poland",
+    flag: "🇵🇱",
+    payout: "$2,910",
+    image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2",
   },
   {
-    name: "Magisha",
-    country: "Uganda",
-    flag: "🇺🇬",
-    payout: "$750",
-    image: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39",
-  },
-  {
-    name: "Catherine",
+    name: "Josh",
     country: "United Kingdom",
     flag: "🇬🇧",
-    payout: "$542",
-    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
-  },
-  {
-    name: "Hidde",
-    country: "Netherlands",
-    flag: "🇳🇱",
-    payout: "$5,521",
+    payout: "$6,520",
     image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e",
   },
   {
-    name: "Steve",
-    country: "Nigeria",
-    flag: "🇳🇬",
-    payout: "$6,434",
+    name: "Slada",
+    country: "Serbia",
+    flag: "🇷🇸",
+    payout: "$1,520",
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
+  },
+  {
+    name: "Denise",
+    country: "Netherlands",
+    flag: "🇳🇱",
+    payout: "$4,576",
     image: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde",
+  },
+  {
+    name: "Slada",
+    country: "Serbia",
+    flag: "🇷🇸",
+    payout: "$1,520",
+    image: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1",
   },
 ];
 
 /* =========================
    COMPONENT
 ========================= */
-export default function FundedTraders() {
+export default function FundedTradersSlider() {
   const sliderRef = useRef(null);
-  const cardRef = useRef(null);
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const CARD_GAP = 24; // gap-6
-  const SIDE_PADDING = 24; // px-6
-
-  /* -------------------------
-     Helpers
-  -------------------------- */
-  const getCardWidth = () =>
-    cardRef.current?.offsetWidth || 320;
-
-  const scrollToIndex = (index) => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    const cardWidth = getCardWidth();
-    const target =
-      index * (cardWidth + CARD_GAP) - SIDE_PADDING;
-
-    el.scrollTo({
-      left: target,
-      behavior: "smooth",
-    });
+  const settings = {
+    infinite: false,
+    arrows: false,
+    dots: false,
+    swipeToSlide: true,
+    slidesToShow: 1,
+    variableWidth: true,
+    speed: 500,
+    touchThreshold: 12,
   };
-
-  /* -------------------------
-     Arrow handlers
-  -------------------------- */
-  const prev = () => {
-    setActiveIndex((i) => Math.max(i - 1, 0));
-  };
-
-  const next = () => {
-    setActiveIndex((i) =>
-      Math.min(i + 1, traders.length - 1)
-    );
-  };
-
-  /* -------------------------
-     Sync scroll on index change
-  -------------------------- */
-  useEffect(() => {
-    scrollToIndex(activeIndex);
-  }, [activeIndex]);
-
-  /* -------------------------
-     Drag / swipe with snap
-  -------------------------- */
-  useEffect(() => {
-    const el = sliderRef.current;
-    if (!el) return;
-
-    let startX = 0;
-    let startScroll = 0;
-    let isDown = false;
-
-    const onDown = (e) => {
-      isDown = true;
-      startX = e.pageX || e.touches[0].pageX;
-      startScroll = el.scrollLeft;
-      el.classList.add("cursor-grabbing");
-    };
-
-    const onMove = (e) => {
-      if (!isDown) return;
-      const x = e.pageX || e.touches[0].pageX;
-      el.scrollLeft = startScroll - (x - startX);
-    };
-
-    const onUp = () => {
-      if (!isDown) return;
-      isDown = false;
-      el.classList.remove("cursor-grabbing");
-
-      const cardSize = getCardWidth() + CARD_GAP;
-      const newIndex = Math.round(
-        (el.scrollLeft + SIDE_PADDING) / cardSize
-      );
-
-      setActiveIndex(
-        Math.min(
-          Math.max(newIndex, 0),
-          traders.length - 1
-        )
-      );
-    };
-
-    el.addEventListener("mousedown", onDown);
-    el.addEventListener("mousemove", onMove);
-    window.addEventListener("mouseup", onUp);
-
-    el.addEventListener("touchstart", onDown, { passive: true });
-    el.addEventListener("touchmove", onMove, { passive: true });
-    el.addEventListener("touchend", onUp);
-
-    return () => {
-      el.removeEventListener("mousedown", onDown);
-      el.removeEventListener("mousemove", onMove);
-      window.removeEventListener("mouseup", onUp);
-
-      el.removeEventListener("touchstart", onDown);
-      el.removeEventListener("touchmove", onMove);
-      el.removeEventListener("touchend", onUp);
-    };
-  }, []);
 
   return (
-    <>
-      {/* =========================
-          SCOPED CSS
-      ========================= */}
-      <style>{`
-        .scrollbar-hide::-webkit-scrollbar { display: none; }
-        .scrollbar-hide { scrollbar-width: none; }
-      `}</style>
-
-      <section className="bg-gradient-to-b from-[#050617] to-[#070A23] py-24">
-        <div className="max-w-7xl mx-auto px-6">
-
-          {/* HEADER */}
-          <div className="flex items-center justify-between mb-14 gap-6">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3">
-                Empowering Funded Traders Across the World
-              </h2>
-              <p className="text-slate-400 text-lg">
-                Real traders share their FXCELITE success stories.
-              </p>
-            </div>
-
-            {/* ARROWS */}
-            <div className="flex gap-4">
-              <ArrowButton
-                disabled={activeIndex === 0}
-                onClick={prev}
-              >
-                <ArrowLeft />
-              </ArrowButton>
-              <ArrowButton
-                disabled={activeIndex === traders.length - 1}
-                onClick={next}
-              >
-                <ArrowRight />
-              </ArrowButton>
-            </div>
+    <section className="bg-gradient-to-b from-[#020617] to-[#050a2a] py-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-10 gap-6">
+          <div>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-2">
+              Empowering Funded Traders Across the World
+            </h2>
+            <p className="text-slate-400">
+              Real traders share their FundYourFX success stories.
+            </p>
           </div>
 
-          {/* SLIDER */}
-          <div
-            ref={sliderRef}
-            className="flex gap-6 px-6 overflow-x-auto scrollbar-hide cursor-grab select-none"
-          >
-            {traders.map((trader, i) => (
-              <div
-                key={i}
-                ref={i === 0 ? cardRef : null}
-              >
-                <TraderCard {...trader} />
-              </div>
-            ))}
+          {/* ARROWS (DESKTOP ONLY) */}
+          <div className="hidden md:flex gap-3">
+            <CircleArrow onClick={() => sliderRef.current.slickPrev()}>
+              <ArrowLeft size={18} />
+            </CircleArrow>
+            <CircleArrow onClick={() => sliderRef.current.slickNext()}>
+              <ArrowRight size={18} />
+            </CircleArrow>
           </div>
-
         </div>
-      </section>
-    </>
+
+        {/* SLIDER */}
+        <Slider ref={sliderRef} {...settings}>
+          {traders.map((trader, i) => (
+            <div key={i} className="px-2 sm:px-3">
+              <TraderCard {...trader} />
+            </div>
+          ))}
+        </Slider>
+      </div>
+
+      {/* FIX SLICK ALIGNMENT */}
+      <style>{`
+        .slick-track {
+          display: flex !important;
+        }
+      `}</style>
+    </section>
   );
 }
 
@@ -222,24 +112,48 @@ export default function FundedTraders() {
 ========================= */
 function TraderCard({ name, country, flag, payout, image }) {
   return (
-    <div className="relative min-w-[320px] h-[420px] rounded-2xl overflow-hidden bg-white/5 border border-white/10 backdrop-blur-md transition-transform duration-300 hover:-translate-y-1">
+    <div
+      className="
+        relative
+        w-[310px]
+        sm:w-[300px]
+        md:w-[340px]
+        lg:w-[380px]
+        h-[360px]
+        sm:h-[380px]
+        md:h-[420px]
+        rounded-md
+        overflow-hidden
+        bg-white/5
+        border border-white/10
+        backdrop-blur-md
+        transition-transform duration-300
+        hover:-translate-y-1
+      "
+    >
+      {/* IMAGE */}
       <img
         src={image}
         alt={name}
-        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+        className="absolute inset-0 w-full h-full object-cover"
       />
+
+      {/* OVERLAY */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-      <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/60 px-3 py-1.5 rounded-full text-sm text-white backdrop-blur">
+      {/* COUNTRY BADGE */}
+      <div className="absolute top-4 left-4 flex items-center gap-2 bg-black/60 px-3 py-1.5 rounded-full text-xs sm:text-sm text-white">
         <span>{flag}</span>
-        <span>{country}</span>
+        <span className="hidden sm:inline">{country}</span>
       </div>
 
-      <div className="absolute bottom-5 left-5 right-5 text-white">
-        <p className="font-semibold text-lg">{name}</p>
-        <div className="flex items-center gap-3 mt-2">
-          <p className="text-xl font-bold">{payout}</p>
-          <span className="px-3 py-1 rounded-full bg-indigo-500 text-xs font-semibold">
+      {/* FOOTER */}
+      <div className="absolute bottom-4 left-4 right-4 text-white">
+        <p className="font-semibold text-base sm:text-lg mb-1">{name}</p>
+
+        <div className="flex items-center gap-3">
+          <span className="text-lg sm:text-xl font-bold">{payout}</span>
+          <span className="px-3 py-1 rounded-full bg-indigo-600 text-xs font-semibold">
             Payout
           </span>
         </div>
@@ -251,17 +165,11 @@ function TraderCard({ name, country, flag, payout, image }) {
 /* =========================
    ARROW BUTTON
 ========================= */
-function ArrowButton({ children, onClick, disabled }) {
+function CircleArrow({ children, onClick }) {
   return (
     <button
       onClick={onClick}
-      disabled={disabled}
-      className={`w-11 h-11 rounded-full border border-white/30 text-white flex items-center justify-center transition
-        ${
-          disabled
-            ? "opacity-40 cursor-not-allowed"
-            : "hover:bg-white/10 hover:scale-105 active:scale-95"
-        }`}
+      className="w-10 h-10 rounded-full border border-white/30 text-white flex items-center justify-center hover:bg-white/10 transition"
     >
       {children}
     </button>
