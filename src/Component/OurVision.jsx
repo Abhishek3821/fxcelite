@@ -18,8 +18,8 @@ export default function OurVision() {
               for everyone.
             </p>
 
-            <p className="text-slate-400 leading-relaxed mb-5">
-              With the ecosystem of innovative ventures, FundYourFX allows
+            <p className="text-slate-400 leading-relaxed mb-5">FXCELITE
+              With the ecosystem of innovative ventures,  allows
               everyone to access funds, allowing them to trade and invest in
               the financial markets. We strive to develop our traders and
               constantly aim to be a leading trusted, secure and innovative

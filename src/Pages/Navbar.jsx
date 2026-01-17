@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { ChevronDown, ExternalLink, Menu, X } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
+import Logo from "../assets/Logo.png";
 
 export default function Navbar() {
   /* =========================
@@ -52,12 +53,12 @@ export default function Navbar() {
             onClick={() => navTo("/")}
             className="flex items-center gap-3 cursor-pointer"
           >
-            <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
-              <span className="text-white font-bold text-lg">FX</span>
-            </div>
-            <div>
-              <p className="text-white font-bold text-lg">FXCELITE</p>
-              <p className="text-xs text-slate-400">Since 2021</p>
+            <div className="w-49 h-49 rounded-lg bg-gradient-to-br flex items-center justify-center overflow-hidden">
+              <img
+                src={Logo}
+                alt="FXCELITE Logo"
+                className="w-47 h-47 object-contain"
+              />
             </div>
           </div>
 

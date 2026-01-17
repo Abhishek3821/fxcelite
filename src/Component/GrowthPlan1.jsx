@@ -35,13 +35,13 @@ export default function GrowthPlan() {
                 F
               </div>
               <span className="text-white font-semibold tracking-wide">
-                FundYourFX
+                FXCELITE
               </span>
             </div>
 
             {/* TITLE */}
             <h3 className="text-2xl md:text-3xl font-extrabold text-white leading-snug mb-6">
-              FUNDYOURFX <br />
+              FXCELITE <br />
               NEW GROWTH <br />
               PLAN SUMMARY
             </h3>

@@ -75,7 +75,7 @@ export default function GrowthPlanTable() {
 
           {/* DESCRIPTION */}
           <p className="max-w-4xl mx-auto text-center text-white/80 text-sm md:text-base leading-relaxed mb-8">
-            FundYourFX was established with the belief that all traders deserve the
+            FXCELITE was established with the belief that all traders deserve the
             opportunity to trade with substantial capital. Through our Instant
             Funded Trader Program and Evaluation Program, we offer simulated funded
             trading accounts, with the potential to scale up to $3 million. When a

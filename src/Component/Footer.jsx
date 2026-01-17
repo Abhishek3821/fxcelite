@@ -13,8 +13,7 @@ export default function Footer() {
   return (
     <footer className="bg-gradient-to-b from-[#050617] to-[#070A23] pt-24">
       <div className="max-w-7xl mx-auto px-6">
-
-        {/* TOP CTA */}
+        {/* ================= TOP CTA ================= */}
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 mb-14">
           <h2 className="text-3xl md:text-4xl font-extrabold text-white max-w-2xl">
             Unlock Your Potential and <br /> Join Our Trading Team!
@@ -35,9 +34,8 @@ export default function Footer() {
         {/* DIVIDER */}
         <div className="h-px bg-white/10 mb-16" />
 
-        {/* MAIN FOOTER */}
+        {/* ================= MAIN FOOTER ================= */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-14 mb-16">
-
           {/* BRAND */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
@@ -52,31 +50,39 @@ export default function Footer() {
 
             <p className="text-slate-300 text-sm mb-6">
               GOOD ★★★★★{" "}
-              <span className="text-slate-400">
-                2207 reviews · Trustindex
-              </span>
+              <span className="text-slate-400">2207 reviews · Trustindex</span>
             </p>
 
-            {/* SOCIALS */}
+            {/* ================= SOCIALS ================= */}
             <div className="flex gap-3">
-              <a href="https://facebook.com" target="_blank" rel="noreferrer" className="social">
+              <a
+                href="https://www.facebook.com/profile.php?id=61586456620414"
+                target="_blank"
+                rel="noreferrer"
+                className="social"
+              >
                 <Facebook size={18} />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className="social">
+
+              <a
+                href="https://www.instagram.com/fxcelite/"
+                target="_blank"
+                rel="noreferrer"
+                className="social"
+              >
                 <Instagram size={18} />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noreferrer" className="social">
-                <Youtube size={18} />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noreferrer" className="social">
-                <Linkedin size={18} />
-              </a>
-              <a href="https://twitter.com" target="_blank" rel="noreferrer" className="social">
+
+              <a
+                href="https://x.com/Fxcelite"
+                target="_blank"
+                rel="noreferrer"
+                className="social"
+              >
                 <Twitter size={18} />
               </a>
-              <a href="https://wa.me/" target="_blank" rel="noreferrer" className="social">
-                <MessageCircle size={18} />
-              </a>
+
+              {/* Coming Soon */}
             </div>
           </div>
 
@@ -92,11 +98,12 @@ export default function Footer() {
 
           {/* RESOURCES */}
           <FooterColumn title="Resources">
-            {/* <FooterLink to="/blog">Blog & Trading Guides</FooterLink> */}
-            <FooterLink to="faqs">FAQs & Helpdesk</FooterLink>
+            <FooterLink to="/faqs">FAQs & Helpdesk</FooterLink>
 
             <h4 className="text-white font-semibold mt-6 mb-4">Terms</h4>
-            <FooterLink to="/terms-and-conditions">Terms and Conditions</FooterLink>
+            <FooterLink to="/terms-and-conditions">
+              Terms and Conditions
+            </FooterLink>
             <FooterLink to="/refund-policy">Refund Policy</FooterLink>
             <FooterLink to="/privacy-policy">Privacy Policy</FooterLink>
           </FooterColumn>
@@ -105,15 +112,17 @@ export default function Footer() {
           <FooterColumn title="Legal">
             <FooterLink to="/affiliate">Affiliate Program</FooterLink>
             <FooterLink to="/investor-relations">Investor Relations</FooterLink>
-            <FooterLink to="/white-label-solutions">White Label Solution</FooterLink>
+            <FooterLink to="/white-label-solutions">
+              White Label Solution
+            </FooterLink>
           </FooterColumn>
         </div>
 
         {/* DISCLAIMER */}
         <p className="text-slate-400 text-xs leading-relaxed mb-10">
           We provide virtual demo accounts that simulate live market conditions.
-          Any reference to “Funded” on our website refers only to virtual funding.
-          Our services are not investment services or recommendations.
+          Any reference to “Funded” on our website refers only to virtual
+          funding. Our services are not investment services or recommendations.
         </p>
 
         {/* DIVIDER */}
@@ -122,12 +131,13 @@ export default function Footer() {
         {/* BOTTOM BAR */}
         <div className="flex flex-col md:flex-row items-center justify-between text-slate-400 text-sm pb-10 gap-4">
           <p>© 2026 FXCELITE · All rights reserved</p>
-          <p>FYFX Capital LTD · Hong Kong Registered company number: 75280952-000</p>
+          <p>
+            FYFX Capital LTD · Hong Kong Registered company number: 75280952-000
+          </p>
         </div>
-
       </div>
 
-      {/* shared styles */}
+      {/* ================= SHARED STYLES ================= */}
       <style>{`
         .social {
           width: 40px;
@@ -138,17 +148,19 @@ export default function Footer() {
           align-items: center;
           justify-content: center;
           color: white;
-          transition: opacity 0.2s;
+          transition: opacity 0.2s, transform 0.2s;
         }
-        .social:hover { opacity: 0.85; }
+        .social:hover {
+          opacity: 0.9;
+          transform: translateY(-2px);
+        }
       `}</style>
     </footer>
   );
 }
 
-/* =========================
-   HELPERS
-========================= */
+/* ================= HELPERS ================= */
+
 function FooterColumn({ title, children }) {
   return (
     <div>
@@ -161,10 +173,7 @@ function FooterColumn({ title, children }) {
 function FooterLink({ to, children }) {
   return (
     <li>
-      <Link
-        to={to}
-        className="hover:text-white transition"
-      >
+      <Link to={to} className="hover:text-white transition">
         {children}
       </Link>
     </li>

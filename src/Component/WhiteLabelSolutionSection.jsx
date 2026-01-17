@@ -49,13 +49,13 @@ export default function WhiteLabelSolutionSection() {
 
             <h3 className="text-3xl md:text-4xl font-extrabold text-white mb-6 leading-tight">
               Tailor-Made Prop Trading: <br />
-              FundYourFX’s White Label Solution
+              FXCELITE’s White Label Solution
             </h3>
 
             <div className="space-y-4 text-white/85 leading-relaxed max-w-xl">
               <p>
                 Is your prop trading firm missing out on opportunities due to a
-                lack of brand presence and customization? FundYourFX’s White
+                lack of brand presence and customization? FXCELITE’s White
                 Label solution is your best option.
               </p>
 

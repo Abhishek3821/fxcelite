@@ -40,7 +40,7 @@ export default function MissionVision() {
 
             <div className="space-y-5 text-slate-300 text-lg leading-relaxed max-w-xl">
               <p>
-                At FundYourFX, we recognized early on that many funding programs
+                At FXCELITE, we recognized early on that many funding programs
                 fail to truly support talented traders.
               </p>
 
@@ -52,7 +52,7 @@ export default function MissionVision() {
               </p>
 
               <p>
-                That’s why we created FundYourFX — to offer the best-funded
+                That’s why we created  — to offer the best-funded
                 trader program in the industry, designed with your success in
                 mind.
               </p>
